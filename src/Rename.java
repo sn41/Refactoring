@@ -1,19 +1,18 @@
-// 3. **Extract Variable (Выделение переменной)**
+// 4. **Rename Method/Variable (Переименование методов и переменных)**
 
-class ExtractVariableDemoBefore {
-    public void printCircleInfo(double radius) {
-        System.out.println("Circle area: " + (3.14159 * radius * radius));
+class RenameDemoBefore {
+    public int calc(int a, int b) {
+        return a * b;
     }
 }
 
-//**Описание:** Замена сложного выражения на переменную с понятным именем, чтобы облегчить чтение кода.
-//**Ситуация применения:** Сложные выражения в параметрах методов или длинные строки вычислений.
+// **Описание:** Изменение имён переменных, методов или классов на более осмысленные и соответствующие их назначению.
+// **Ситуация применения:** Запутанные или неопределённые имена, затрудняющие понимание кода.
 
-class ExtractVariableDemoAfter {
-    public void printCircleInfo(double radius) {
-        double area = 3.14159 * radius * radius;
-        System.out.println("Circle area: " + area);
+class RenameDemoAfter {
+    public int calculateArea(int width, int height) {
+        return width * height;
     }
 }
 
-//**Преимущество:** Читаемость улучшается благодаря введению промежуточных переменных.
+//**Преимущество:** Упрощение понимания назначения переменных или методов.

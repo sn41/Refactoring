@@ -1,41 +1,29 @@
 
 
-//5. **Move Method/Field (Перемещение метода или поля)**
+//6. **Replace Conditional with Polymorphism (Замена условных конструкций полиморфизмом)**
 
-class MoveDemoBefore {
-    public int calc(int a, int b) {
-        return a * b;
+class ReplaceConditionalDemoBefore {
+    public double calculateShippingCost(Order order) {
+        if (order.isInternational()) {
+            return order.getWeight() * 15;
+        } else {
+            return order.getWeight() * 5;
+        }
     }
 }
 
-class Customer {
-    public double calculateTotalOrderAmount(OrderBefore order) {
-        return order.getAmount() - order.getDiscount();
+
+//**Описание:** Замена условных конструкций (`if/else` или `switch`) на полиморфизм путём использования иерархий классов.
+//**Ситуация применения:** Частые проверки на типы или состояния объектов.
+
+class ReplaceConditionalDemoAfter {
+    public double calculateShippingCost(Order order) {
+        if (order.isInternational()) {
+            return order.getWeight() * 15;
+        } else {
+            return order.getWeight() * 5;
+        }
     }
 }
 
-class OrderBefore {
-    private double amount;
-    private double discount;
-
-    public double getAmount() { return amount; }
-    public double getDiscount() { return discount; }
-}
-
-//**Описание:** Перенос методов или полей в классы, которым они логически принадлежат.
-//**Ситуация применения:** Метод использует данные другого класса больше, чем данные своего класса.
-
-class OrderAfter {
-    private double amount;
-    private double discount;
-
-    public double getAmount() { return amount; }
-    public double getDiscount() { return discount; }
-
-    //добавлено из класса Customer, класс Customer устранён
-    public double calculateTotalAmount() {
-        return amount - discount;
-    }
-}
-
-//**Преимущество:** Повышение когезии кода и снижение связности между классами.
+//**Преимущество:** Уменьшение дублирования кода и упрощение расширяемости.

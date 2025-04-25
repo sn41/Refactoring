@@ -1,25 +1,45 @@
-//2. **Inline Method (Встраивание метода)**
+// 11. **Decompose Conditional (Разбиение сложных условных конструкций)**
 
 
-class InlineMethodDemoBefore {
+abstract class Customer2{
 
-    public double getFinalPrice(Product product) {
-        return applyDiscount(product.getPrice());
-    }
+    public abstract int getAge();
 
-    private double applyDiscount(double price) {
-        return price * 0.9;
+    public abstract int getPurchaseAmount();
+}
+class DecomposeConditionaDemoBefore {
+
+    public String getPromotion(Customer2 customer) {
+        if (customer.getAge() > 18 && customer.getPurchaseAmount() > 100) {
+            return "Gold";
+        } else if (customer.getAge() <= 18 && customer.getPurchaseAmount() > 50) {
+            return "Silver";
+        }
+        return "Bronze";
     }
 
 }
 
-//**Описание:** Замена вызова метода его непосредственным содержимым, если метод слишком прост или избыточен.
-//**Ситуация применения:** Метод слишком короткий, его логика очевидна, и он используется только в одном месте
+//**Описание:** Разделение сложного условия на несколько логически понятных частей.
+//        **Ситуация применения:** Использование длинных и запутанных `if` или `else if`.
 
-class InlineMethodDemoAfter {
-    public double getFinalPrice(Product product) {
-        return product.getPrice() * 0.9;
+class DecomposeConditionaDemoAfter {
+    public String getPromotion(Customer2 customer) {
+        if (isGoldPromotion(customer)) {
+            return "Gold";
+        } else if (isSilverPromotion(customer)) {
+            return "Silver";
+        }
+        return "Bronze";
+    }
+
+    private boolean isGoldPromotion(Customer2 customer) {
+        return customer.getAge() > 18 && customer.getPurchaseAmount() > 100;
+    }
+
+    private boolean isSilverPromotion(Customer2 customer) {
+        return customer.getAge() <= 18 && customer.getPurchaseAmount() > 50;
     }
 }
 
-//**Преимущество:** Уменьшение уровня абстракции и упрощение понимания кода.
+//**Преимущество:** Улучшение читаемости и сопровождения кода.

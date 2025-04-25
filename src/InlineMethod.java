@@ -1,33 +1,25 @@
-//Давайте рассмотрим основные методы рефакторинга подробнее.
-//Эти методы помогут вам сделать код более понятным, упрощённым в поддержке и масштабируемым.
+//2. **Inline Method (Встраивание метода)**
 
 
-// 1. **Extract Method (Выделение метода)**
+class InlineMethodDemoBefore {
 
+    public double getFinalPrice(Product product) {
+        return applyDiscount(product.getPrice());
+    }
 
-class ExtractMethodDemoBefore {
-    public void processOrder(Order order) {
-        System.out.println("Processing order #" + order.getId());
-        double discount = order.getAmount() > 100 ? 0.1 : 0;
-        double total = order.getAmount() * (1 - discount);
-        System.out.println("Total amount: " + total);
+    private double applyDiscount(double price) {
+        return price * 0.9;
+    }
+
+}
+
+//**Описание:** Замена вызова метода его непосредственным содержимым, если метод слишком прост или избыточен.
+//**Ситуация применения:** Метод слишком короткий, его логика очевидна, и он используется только в одном месте
+
+class InlineMethodDemoAfter {
+    public double getFinalPrice(Product product) {
+        return product.getPrice() * 0.9;
     }
 }
 
-//        **Описание:** Вынос части логики из длинного метода в новый вспомогательный метод.
-//        **Ситуация применения:** Когда метод становится слишком большим или выполняет несколько задач одновременно.
-
-class ExtractMethodDemoAFter {
-    public void processOrder(Order order) {
-        System.out.println("Processing order #" + order.getId());
-        double total = calculateTotalAmount(order);
-        System.out.println("Total amount: " + total);
-    }
-
-    private double calculateTotalAmount(Order order) {
-        double discount = order.getAmount() > 100 ? 0.1 : 0;
-        return order.getAmount() * (1 - discount);
-    }
-}
-
-//      **Преимущество:** Улучшение читаемости и повторного использования выделенной логики.
+//**Преимущество:** Уменьшение уровня абстракции и упрощение понимания кода.

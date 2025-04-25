@@ -1,33 +1,22 @@
-//Давайте рассмотрим основные методы рефакторинга подробнее.
-//Эти методы помогут вам сделать код более понятным, упрощённым в поддержке и масштабируемым.
+//7. **Extract Class (Выделение класса)**
 
-
-// 1. **Extract Method (Выделение метода)**
-
-
-class ExtractMethodDemoBefore {
-    public void processOrder(Order order) {
-        System.out.println("Processing order #" + order.getId());
-        double discount = order.getAmount() > 100 ? 0.1 : 0;
-        double total = order.getAmount() * (1 - discount);
-        System.out.println("Total amount: " + total);
-    }
+class EmployeeBefore {
+    private String name;
+    private String street;
+    private String city;
 }
 
-//        **Описание:** Вынос части логики из длинного метода в новый вспомогательный метод.
-//        **Ситуация применения:** Когда метод становится слишком большим или выполняет несколько задач одновременно.
+//**Описание:** Создание нового класса для отделения обязанностей.
+//**Ситуация применения:** Класс содержит слишком много несвязанных данных или логики.
 
-class ExtractMethodDemoAfter {
-    public void processOrder(Order order) {
-        System.out.println("Processing order #" + order.getId());
-        double total = calculateTotalAmount(order);
-        System.out.println("Total amount: " + total);
-    }
-
-    private double calculateTotalAmount(Order order) {
-        double discount = order.getAmount() > 100 ? 0.1 : 0;
-        return order.getAmount() * (1 - discount);
-    }
+class EmployeeAfter {
+    private String name;
+    private AddressAfter address;
 }
 
-//      **Преимущество:** Улучшение читаемости и повторного использования выделенной логики.
+class AddressAfter {
+    private String street;
+    private String city;
+}
+
+//**Преимущество:** Обособление логики и данных делает код более структурированным.

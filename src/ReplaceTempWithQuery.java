@@ -1,25 +1,25 @@
-//2. **Inline Method (Встраивание метода)**
+//### 9. **Replace Temp with Query (Замена временной переменной запросом)**
 
 
-class InlineMethodDemoBefore {
-
-    public double getFinalPrice(Product product) {
-        return applyDiscount(product.getPrice());
-    }
-
-    private double applyDiscount(double price) {
-        return price * 0.9;
+class ReplaceTempWithQueryDemoBefore {
+    public double calculateFinalPrice(Order order) {
+        double discount = order.isVIP() ? 0.1 : 0.0;
+        return order.getAmount() * (1 - discount);
     }
 
 }
 
-//**Описание:** Замена вызова метода его непосредственным содержимым, если метод слишком прост или избыточен.
-//**Ситуация применения:** Метод слишком короткий, его логика очевидна, и он используется только в одном месте
+//**Описание:** Устранение временной переменной путём замены её на вызов метода, который возвращает необходимое значение.
+//**Ситуация применения:** Избыточное использование переменных с неизменяемым значением.
 
-class InlineMethodDemoAfter {
-    public double getFinalPrice(Product product) {
-        return product.getPrice() * 0.9;
+class ReplaceTempWithQueryDemoAfter {
+    public double calculateFinalPrice(Order order) {
+        return order.getAmount() * (1 - getDiscount(order));
+    }
+
+    private double getDiscount(Order order) {
+        return order.isVIP() ? 0.1 : 0.0;
     }
 }
 
-//**Преимущество:** Уменьшение уровня абстракции и упрощение понимания кода.
+//**Преимущество:** Уменьшение количества переменных, повышение структурированности кода..

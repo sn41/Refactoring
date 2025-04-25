@@ -1,25 +1,23 @@
-//2. **Inline Method (Встраивание метода)**
+//### 12. **Replace Magic Numbers with Named Constants (Замена магических чисел на именованные константы)**
 
 
-class InlineMethodDemoBefore {
+class MagicNumbersDemoBefore {
 
-    public double getFinalPrice(Product product) {
-        return applyDiscount(product.getPrice());
-    }
-
-    private double applyDiscount(double price) {
-        return price * 0.9;
+    public double calculateCircleArea(double radius) {
+        return 3.14159 * radius * radius;
     }
 
 }
 
-//**Описание:** Замена вызова метода его непосредственным содержимым, если метод слишком прост или избыточен.
-//**Ситуация применения:** Метод слишком короткий, его логика очевидна, и он используется только в одном месте
+//**Описание:** Замена числовых литералов на константы с понятным именем.
+//        **Ситуация применения:** Непонятные числа, спрятанные в коде.
 
-class InlineMethodDemoAfter {
-    public double getFinalPrice(Product product) {
-        return product.getPrice() * 0.9;
+class MagicNumbersDemoAfter {
+    private static final double PI = 3.14159;
+
+    public static double calculateCircleArea(double radius) {
+        return PI * radius * radius;
     }
 }
 
-//**Преимущество:** Уменьшение уровня абстракции и упрощение понимания кода.
+//**Преимущество:** Улучшение понимания и облегчение управления значениями.

@@ -1,4 +1,14 @@
-package PACKAGE_NAME;
+public abstract class Order {
+    abstract double getAmount();
+    abstract long getId();
 
-public class Order {
+    abstract boolean isInternational();
+
+    abstract double getDiscount();
+    abstract double getTotal();
+    abstract double getTotalDiscount();
+    abstract double getWeight();
+    abstract double getTotalWeight();
+
+    public abstract boolean isVIP();
 }

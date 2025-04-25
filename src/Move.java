@@ -1,18 +1,37 @@
-// 4. **Rename Method/Variable (Переименование методов и переменных)**
 
-class RenameDemoBefore {
-    public int calc(int a, int b) {
-        return a * b;
+
+//5. **Move Method/Field (Перемещение метода или поля)**
+
+// До
+
+class Customer {
+    public double calculateTotalOrderAmount(OrderBefore order) {
+        return order.getAmount() - order.getDiscount();
     }
 }
 
-// **Описание:** Изменение имён переменных, методов или классов на более осмысленные и соответствующие их назначению.
-// **Ситуация применения:** Запутанные или неопределённые имена, затрудняющие понимание кода.
+class OrderBefore {
+    private double amount;
+    private double discount;
 
-class RenameDemoAfter {
-    public int calculateArea(int width, int height) {
-        return width * height;
+    public double getAmount() { return amount; }
+    public double getDiscount() { return discount; }
+}
+
+//**Описание:** Перенос методов или полей в классы, которым они логически принадлежат.
+//**Ситуация применения:** Метод использует данные другого класса больше, чем данные своего класса.
+
+class OrderAfter {
+    private double amount;
+    private double discount;
+
+    public double getAmount() { return amount; }
+    public double getDiscount() { return discount; }
+
+    //добавлено из класса Customer, класс Customer устранён
+    public double calculateTotalAmount() {
+        return amount - discount;
     }
 }
 
-//**Преимущество:** Упрощение понимания назначения переменных или методов.
+//**Преимущество:** Повышение когезии кода и снижение связности между классами.

@@ -1,22 +1,43 @@
-//7. **Extract Class (Выделение класса)**
+//8. **Introduce Parameter Object (Введение объекта параметров)**
 
-class EmployeeBefore {
-    private String name;
-    private String street;
-    private String city;
+class IntroduceParameterObjectDemoBefore {
+    public void createAccount(String firstName, String lastName, String email, String phoneNumber) {
+        System.out.println("Account created for: " + firstName + " " + lastName);
+    }
 }
 
-//**Описание:** Создание нового класса для отделения обязанностей.
-//**Ситуация применения:** Класс содержит слишком много несвязанных данных или логики.
+//**Описание:** Когда метод принимает слишком много параметров, связанные параметры объединяются в один объект, упрощая вызов и сопровождение.
+// **Ситуация применения:** Использование методов с длинными списками параметров.
 
-class EmployeeAfter {
-    private String name;
-    private AddressAfter address;
+class IntroduceParameterObjectAfter {
+    public void createAccount(UserInfo userInfo) {
+        System.out.println("Account created for: " + userInfo.getFirstName() + " " + userInfo.getLastName());
+    }
 }
 
-class AddressAfter {
-    private String street;
-    private String city;
+class UserInfo {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+
+    public UserInfo(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    // Геттеры и сеттеры
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }
 
-//**Преимущество:** Обособление логики и данных делает код более структурированным.
+
+//**Преимущество:** Уменьшение сложности сигнатур методов и повышение читаемости.
+

@@ -1,23 +1,32 @@
-//### 12. **Replace Magic Numbers with Named Constants (Замена магических чисел на именованные константы)**
+//13. **Replace Method with Variable (Замена метода переменной)**
 
 
-class MagicNumbersDemoBefore {
+class ReplaceMethodDemoBefore {
 
-    public double calculateCircleArea(double radius) {
-        return 3.14159 * radius * radius;
+    public void printInvoice(Order order) {
+        System.out.println("Tax: " + calculateTax(order));
+        System.out.println("Total: " + (order.getAmount() + calculateTax(order)));
+    }
+
+    private double calculateTax(Order order) {
+        return 42;
     }
 
 }
 
-//**Описание:** Замена числовых литералов на константы с понятным именем.
-//        **Ситуация применения:** Непонятные числа, спрятанные в коде.
+//**Описание:** Замена многократных вызовов метода с неизменяемым результатом на переменную, хранящую это значение.
+//**Ситуация применения:** Избыточные вызовы метода, которые могут снижать производительность.
 
-class MagicNumbersDemoAfter {
-    private static final double PI = 3.14159;
+class ReplaceMethodDemoAfter {
+    public void printInvoice(Order order) {
+        double tax = calculateTax(order);
+        System.out.println("Tax: " + tax);
+        System.out.println("Total: " + (order.getAmount() + tax));
+    }
 
-    public static double calculateCircleArea(double radius) {
-        return PI * radius * radius;
+    private double calculateTax(Order order) {
+        return 42;
     }
 }
 
-//**Преимущество:** Улучшение понимания и облегчение управления значениями.
+//**Преимущество:** Оптимизация и упрощение кода.

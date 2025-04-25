@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
-public class Product {
+public abstract class Product {
+     abstract int getPrice();
 }
